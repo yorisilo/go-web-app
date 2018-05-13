@@ -2,14 +2,16 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 )
 
 func main() {
+	fmt.Println("server listening on port 1234")
 	listener, err := net.Listen("tcp", "0.0.0.0:1234")
+
 	if err != nil {
-		fmt.Printf("Listen error: %s\n", err)
-		return
+		log.Fatalln(err)
 	}
 	defer listener.Close()
 

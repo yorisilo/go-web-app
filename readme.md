@@ -3,6 +3,7 @@
 * [ネットワークプログラミング](http://ash.jp/net/prog_net.htm)
 * [Goでnet/httpな簡単なJSON API](https://muunyblue.github.io/ebeb300882677f350ea818c8f333f5b9.html)
 * [GoでJSON APIを書く](http://sgykfjsm.github.io/blog/2016/03/13/golang-json-api-tutorial/)
+* [go web examples](https://gowebexamples.com/)
 
 # nc コマンド
 [nc コマンド 使い方メモ](https://qiita.com/yasuhiroki/items/d470829ab2e30ee6203f)
@@ -164,6 +165,10 @@ Webサーバの動作原理は簡単に説明できます：
 * Response：サーバがクライアントにデータをフィードバックする必要があります。
 * Conn：ユーザの毎回のリクエストリンクです。
 * Handler：リクエストを処理し、返すデータを生成する処理ロジック。
+* middleware: コアロジックであるApp に対して、前処理と後処理を提供するものが、ミドルウェア [ミドルウェアって何やねん！？](https://qiita.com/bussorenre/items/0ec8722a8f0ecd977104#%E3%83%9F%E3%83%89%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%A3%E3%81%A6%E4%BD%95%E3%82%84%E3%81%AD%E3%82%93)
+
+## Go lang の http パッケージについて
+* [Go 言語の http パッケージにある Handle とか Handler とか HandleFunc とか HandlerFunc とかよくわからないままとりあえずイディオムとして使ってたのでちゃんと理解したメモ](https://qiita.com/nirasan/items/2160be0a1d1c7ccb5e65)
 
 # 3 way hand shake
 http://wa3.i-3-i.info/word15429.html
@@ -306,3 +311,19 @@ server
 
 [WebSocketプロトコル](https://www.slideshare.net/tuvistavie/websocket-29202219)
 [WebSocket / WebRTCの技術紹介](https://www.slideshare.net/mawarimichi/websocketwebrtc)
+[Go言語 - WebSocketのクライアントでJSONメッセージをやり取りしてみる](http://blog.y-yuki.net/entry/2017/04/24/163000)
+[Reconnecting Gorilla Websocket client on failure/lost connection](https://groups.google.com/forum/#!topic/gorilla-web/d2YHA309HY0)
+https://doc01.pf.iij-engineering.co.jp/pub/sdkdoc/v1/ja_JP/websocketapi/websockif_pub_receiver.html
+
+## websocket 使い方
+大まかに、
+
+1. websocket.DialでWebSocketのクライアントを生成してコネクション確立し、
+1. websocket.Connを通じてメッセージの送受信を行うという
+
+流れ
+
+実際に送受信するメッセージはJSON形式として、
+
+* websocket.JSON.Sendでサーバへのメッセージ送信、
+* websocket.JSON.Receiveでサーバからのメッセージ受信を行います
